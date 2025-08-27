@@ -6,4 +6,3 @@ edition = "2024"
 [dependencies]
 console = "0.16.0"
 dialoguer = "0.12.0"
-form_urlencoded = "1.2.2"
