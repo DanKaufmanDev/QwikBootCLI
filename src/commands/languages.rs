@@ -94,7 +94,7 @@ func main() {
             fs::write(format!("{}/cmd/{}/main.go", project_name, project_name.to_lowercase()), main_content)?;
             println!("Creating Go project in {}", project_name);
             println!("To run the project:");
-            println!("  cd {}", project_name);
+            println!("  cd {}/{}", project_name, project_name.to_lowercase());
             println!("  go run main.go");
             Ok(())
 
