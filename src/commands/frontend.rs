@@ -2,7 +2,7 @@ use dialoguer::Select;
 use std::process::Command;
 
 pub fn create_html_js_project(project_name: &str) -> Result<(), Box<dyn std::error::Error>> {
-    let files = vec!["README.md", "index.html", "style.css", "script.js"];
+    let files = vec!["README.md", "index.html", "style.css", "script.js", ".gitignore"];
 
     for file in files {
         Command::new("touch")
