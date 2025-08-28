@@ -8,7 +8,7 @@ $ErrorActionPreference = "Stop"
 Write-Host "Installing QwikBoot CLI..."
 
 if (!(Test-Path $InstallDir)) {
-    New-Item - ItemType Directory -Force -Path $InstallDir | Out-Null
+    New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
 }
 
 $arch = if ([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture -eq "x64") {
@@ -34,20 +34,24 @@ if (!$asset) {
 }
 
 $url = $asset.browser_download_url
-$zipPath = $env:TEMP\qwikboot.zip
+$zipPath = Join-Path $env:TEMP "qwikboot.zip"
 
 Write-Host "Downloading from $url"
 Invoke-WebRequest -Uri $url -OutFile $zipPath
 
-$extractPath  = "$env:TEMP\qwikboot"
+$extractPath = Join-Path $env:TEMP "qwikboot"
 if (Test-Path $extractPath) { Remove-Item -Recurse -Force $extractPath }
 Expand-Archive -Path $zipPath -DestinationPath $extractPath
 
-Move-Item -Force "$extractPath\qwikboot.exe" "$InstallDir\qwikboot.exe"
+Move-Item -Force (Join-Path $extractPath "qwikboot.exe") (Join-Path $InstallDir "qwikboot.exe")
 
-if (-not ($env:PATH -split ';' | ForEach-Object { $_.Trim() | Where-Object { $_ -eq $InstallDir }})) {
-    setx PATH "$env:PATH;$InstallDir" | Out-Null
+$currentPath = [Environment]::GetEnvironmentVariable("PATH", "User")
+if ($currentPath -notlike "*$InstallDir*") {
+    $newPath = "$currentPath;$InstallDir"
+    [Environment]::SetEnvironmentVariable("PATH", $newPath, "User")
+    Write-Host "Added $InstallDir to PATH"
 }
 
 Write-Host "QwikBoot CLI installed successfully!"
 Write-Host "Run 'qwikboot --version' to verify installation."
+Write-Host "Note: You may need to restart your terminal for PATH changes to take effect."
