@@ -37,9 +37,10 @@ jobs:
           run: cargo build --release --target ${{ matrix.target }}
 
         - name: Package Binaries
+          shell: bash
           run: |
             mkdir dist
-            if [[ ${{ matrix.target }} == x86_64-pc-windows-gnu ]]; then
+            if [ "${{ matrix.target }}" = "x86_64-pc-windows-gnu" ]; then
               cp target/${{ matrix.target }}/release/qwikboot.exe dist/
               cd dist && zip qwikboot-${{ matrix.target }}.zip qwikboot.exe
             else
