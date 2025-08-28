@@ -21,7 +21,7 @@ fi
 
 URL="https://github.com/repos/$REPO/releases/latest \
     | grep "browser_download_url.*$TARGET" \
-    | cut -d'"' -f 4 \
+    | cut -d '"' -f 4 \
 
 echo "Downloading $BINARY from $URL"
 curl -L "$URL" -o /tmp/$BINARY.tar.gz
