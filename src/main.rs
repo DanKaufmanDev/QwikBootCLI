@@ -131,7 +131,7 @@ fn main() {
                 println!("\n  --version | -v: Show the version of the program");
                 println!("  --update | -u: Update the program to the latest version");
                 println!("\n  --template: <template_name> <project_name>");
-                println!("  --list | --templates: List all available project templates")
+                println!("  --list | --templates: List all available project templates");
                 println!("  --plugins | -p <https://github.com/USERNAME/REPO>: Fetch community made templates");
             }
             "--version" | "-v" => {
