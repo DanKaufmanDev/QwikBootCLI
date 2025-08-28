@@ -35,9 +35,7 @@ pub enum ProjectType {
 impl ProjectType {
     pub fn display_name(&self) -> String {
         match self {
-            ProjectType::HtmlJavaScript => {
-                style("HTML").color256(208).to_string() + " + " + &style("JavaScript").color256(185).to_string()
-            }
+            ProjectType::HtmlJavaScript => {style("HTML").color256(208).to_string() + " + " + &style("JavaScript").color256(185).to_string()},
             ProjectType::React => style("React").color256(80).to_string(),
             ProjectType::ReactNative => style("React Native").color256(80).to_string(),
             ProjectType::Electron => style("Electron").color256(6).to_string(),
@@ -55,7 +53,7 @@ impl ProjectType {
             ProjectType::Go => style("Go").color256(6).to_string(),
             ProjectType::Python => {style("Pyt").color256(27).to_string() + &style("hon").color256(191).to_string()},
             ProjectType::Rust => style("Rust").color256(208).to_string(),
-            ProjectType::Tauri => style("Tauri").color256(225).to_string(),
+            ProjectType::Tauri => style("Tau").color256(80).to_string() + &style("ri").color256(191).to_string(),
         }
     }
 
